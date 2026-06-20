@@ -4,7 +4,7 @@ import { StyleSheet, Text, View, Image, Button} from 'react-native';
 import React, {useState} from 'react';
 import TarjetasScreen from './TarjetasScreen';
 import Componente1 from './Componente1';
-import FormularioScreen from './Formulario';
+import Formulario from './Formulario';
 
 
 

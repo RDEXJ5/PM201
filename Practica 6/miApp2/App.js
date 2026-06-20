@@ -1,4 +1,4 @@
-/* Zona 1: importaciones de archivos y componentes  */
+
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Image} from 'react-native';
 import MenuScreen from './Screens/MenuScreen'
@@ -12,7 +12,6 @@ export default function App() {
 
   );
 }
-/* Zona 3: Estilos y posicionamientos */
 const styles = StyleSheet.create({
   container: {
     flex: 1,

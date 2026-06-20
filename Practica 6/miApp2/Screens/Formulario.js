@@ -13,7 +13,7 @@ import {
 
 
 /* Zona 2: Main – Componentes */
-export default function FormularioScreen({ onVolver }) {
+export default function Formulario({ onVolver }) {
 
   const [nombre, setNombre] = useState('');
   const [carrera, setCarrera] = useState('');
