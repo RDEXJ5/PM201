@@ -29,6 +29,18 @@ export default function App() {
 export default function App(){
   return(
 
+<<<<<<< Updated upstream
+=======
+      <Perfil style={{ backgroundColor: 'lightgreen' }} nombre="Cristian" carrera="ing" materia="programacion movil" cuatri="Noveno"></Perfil>
+
+      <Perfil style={{ backgroundColor: 'lightcoral' }} nombre="Emiliano" carrera="ing" materia="programacion movil" cuatri="cuarto"></Perfil>
+
+
+      <Perfil style={{ backgroundColor: 'lightgreen' }} nombre="Cristian" carrera="ing" materia="programacion movil" cuatri="Noveno"></Perfil>
+
+
+    </View>
+>>>>>>> Stashed changes
   )
 }
 
@@ -40,5 +52,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+    flexDirection:'row', 
   },
 });
+
+tarjetaVerde:{backgroundColor:'lightgreen', '#6BCB77'}
+tarjetaRoja:{backgroundColor:'lightgreen', '#FF6B6B'
+  
+}
