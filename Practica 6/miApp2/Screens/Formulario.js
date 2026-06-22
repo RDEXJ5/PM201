@@ -76,7 +76,7 @@ export default function FormularioScreen({ onVolver }) {
         </Text>
 
         <TextInput
-          style={styles.input}
+          style={styles.input} 
           value={carrera}
           onChangeText={setCarrera}
           autoCapitalize="words"

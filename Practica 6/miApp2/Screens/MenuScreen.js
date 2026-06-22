@@ -5,6 +5,7 @@ import React, {useState} from 'react';
 import TarjetasScreen from './TarjetasScreen';
 import Componente1 from './Componente1';
 import FormularioScreen from './Formulario';
+import Practica10 from './Practica10';
 
 
 
@@ -28,7 +29,8 @@ export default function App() {
                 />
             );
 
-        
+        case 'practica':
+            return <Practica10/>
 
         case 'menu':
             default:
@@ -43,7 +45,10 @@ export default function App() {
                 <Button title="Practica Componente1" onPress={()=>setScreen('componente1')}/>
 
                 <Button title="Practica Formulario" onPress={()=>setScreen('formulario')}/>
+                
+                <Button title="Practica SafeArea" onPress={() => setScreen('practica')}/>
             </View>
+
         );
     }
 }
