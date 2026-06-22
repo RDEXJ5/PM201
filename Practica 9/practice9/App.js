@@ -1,35 +1,22 @@
-/* Zona 1: importaciones de archivos y componentes */
 import React, { useState } from 'react';
 
 import {
   Alert,
-  Button,
-  Platform,
+  SafeAreaView,
   StyleSheet,
   Text,
   TextInput,
+  TouchableOpacity,
   View,
 } from 'react-native';
 
-
-/* Zona 2: Main – Componentes */
-export default function Formulario({ onVolver }) {
-
+export default function App() {
   const [nombre, setNombre] = useState('');
   const [carrera, setCarrera] = useState('');
 
-  const mostrarMensaje = (titulo, mensaje) => {
-    if (Platform.OS === 'web') {
-      window.alert(`${titulo}\n\n${mensaje}`);
-    } else {
-      Alert.alert(titulo, mensaje);
-    }
-  };
-
   const guardarRegistro = () => {
-
     if (nombre.trim() === '' || carrera.trim() === '') {
-      mostrarMensaje(
+      Alert.alert(
         'Campos incompletos',
         'Por favor, ingresa el nombre y la carrera.'
       );
@@ -37,88 +24,72 @@ export default function Formulario({ onVolver }) {
       return;
     }
 
-    mostrarMensaje(
+    Alert.alert(
       'Registro guardado',
-      `El estudiante ${nombre} de la carrera ${carrera} fue registrado correctamente.`
+      `El estudiante ${nombre} de la carrera ${carrera} fue registrado correctamente.`,
+      [
+        {
+          text: 'Aceptar',
+          onPress: () => {
+            setNombre('');
+            setCarrera('');
+          },
+        },
+      ]
     );
-
-    setNombre('');
-    setCarrera('');
   };
 
   return (
-    <View style={styles.container}>
-
+    <SafeAreaView style={styles.contenedor}>
       <View style={styles.formulario}>
-
-        <Text style={styles.titulo}>
-          Registro de estudiantes
-        </Text>
+        <Text style={styles.titulo}>Registro de estudiantes</Text>
 
         <Text style={styles.descripcion}>
-          Ingresa el nombre y la carrera del estudiante.
+          Ingresa los datos solicitados.
         </Text>
 
-        <Text style={styles.etiqueta}>
-          Nombre del estudiante
-        </Text>
+        <Text style={styles.etiqueta}>Nombre del estudiante</Text>
 
         <TextInput
           style={styles.input}
+          placeholder="Ejemplo: Juan Pérez"
           value={nombre}
           onChangeText={setNombre}
           autoCapitalize="words"
           maxLength={50}
         />
 
-        <Text style={styles.etiqueta}>
-          Carrera
-        </Text>
+        <Text style={styles.etiqueta}>Carrera</Text>
 
         <TextInput
-          style={styles.input} 
+          style={styles.input}
+          placeholder="Ejemplo: Ingeniería en Sistemas"
           value={carrera}
           onChangeText={setCarrera}
           autoCapitalize="words"
           maxLength={60}
         />
 
-        <View style={styles.espacioBoton}>
-          <Button
-            title="Guardar registro"
-            onPress={guardarRegistro}
-          />
-        </View>
-
-        <View style={styles.espacioBoton}>
-          <Button
-            title="Volver al menú"
-            onPress={onVolver}
-            color="#666666"
-          />
-        </View>
-
+        <TouchableOpacity
+          style={styles.boton}
+          onPress={guardarRegistro}
+        >
+          <Text style={styles.textoBoton}>Guardar registro</Text>
+        </TouchableOpacity>
       </View>
-
-    </View>
+    </SafeAreaView>
   );
 }
 
-
-/* Zona 3: Estilos y posicionamientos */
 const styles = StyleSheet.create({
-
-  container: {
+  contenedor: {
     flex: 1,
     backgroundColor: '#eaf2f8',
-    alignItems: 'center',
     justifyContent: 'center',
     padding: 20,
   },
 
   formulario: {
-    width: '100%',
-    maxWidth: 450,
     backgroundColor: '#ffffff',
     padding: 25,
     borderRadius: 15,
@@ -157,8 +128,16 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
 
-  espacioBoton: {
-    marginTop: 10,
+  boton: {
+    backgroundColor: '#1976d2',
+    paddingVertical: 14,
+    borderRadius: 8,
+    alignItems: 'center',
   },
 
+  textoBoton: {
+    color: '#ffffff',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
 });
