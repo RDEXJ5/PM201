@@ -6,6 +6,8 @@ import TarjetasScreen from './TarjetasScreen';
 import Componente1 from './Componente1';
 import FormularioScreen from './Formulario';
 import Practica10 from './Practica10';
+import PressableScreen from './PressableScreen';
+import SwitchScreen from './SwitchScreen';
 
 
 
@@ -21,6 +23,11 @@ export default function App() {
         case 'componente1':
             return <Componente1/>
 
+        case 'pressable':
+            return <PressableScreen/>
+
+        case 'switch':
+            return <SwitchScreen/>
         
         case 'formulario':
             return (
@@ -43,6 +50,10 @@ export default function App() {
 
                 
                 <Button title="Practica Componente1" onPress={()=>setScreen('componente1')}/>
+                
+                <Button title="Practica Pressable" onPress={() => setScreen('pressable')}/>
+
+                <Button title="Practica Swtich" onPress={() => setScreen('switch')}/>
 
                 <Button title="Practica Formulario" onPress={()=>setScreen('formulario')}/>
                 
