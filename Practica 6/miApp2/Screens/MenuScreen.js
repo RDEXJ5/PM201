@@ -8,6 +8,8 @@ import FormularioScreen from './Formulario';
 import Practica10 from './Practica10';
 import PressableScreen from './PressableScreen';
 import SwitchScreen from './SwitchScreen';
+import { Componente4_0 } from './Componente4_0';
+import ComponenteAlert from './ComponenteAlert';
 
 
 
@@ -39,6 +41,12 @@ export default function App() {
         case 'practica':
             return <Practica10/>
 
+        case 'componente4':
+            return <Componente4_0/>
+
+        case 'componenteAlert':
+            return <ComponenteAlert/>
+
         case 'menu':
             default:
 
@@ -58,6 +66,10 @@ export default function App() {
                 <Button title="Practica Formulario" onPress={()=>setScreen('formulario')}/>
                 
                 <Button title="Practica SafeArea" onPress={() => setScreen('practica')}/>
+
+                <Button title="Practica TextInput" onPress={() => setScreen('componente4')}/>
+
+                <Button title="Practica Alert" onPress={() => setScreen('componenteAlert')}/>
             </View>
 
         );
