@@ -1,7 +1,7 @@
 /* Zona 1: importaciones de archivos y componentes  */
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Image, Button} from 'react-native';
-import React, {useState} from 'react';
+import React, {Component, useEffect,useState} from 'react';
 import TarjetasScreen from './TarjetasScreen';
 import Componente1 from './Componente1';
 import FormularioScreen from './Formulario';
@@ -12,6 +12,9 @@ import { Componente4_0 } from './Componente4_0';
 import ComponenteAlert from './ComponenteAlert';
 import FlatListScreen from './FlatListScreen';
 import SectionListScreen from './SectionList';
+import { ImagenFondo } from './ImagenFondo';
+import { Home } from './Home';
+import { SplashScreen } from './SplashScreen';
 
 
 
@@ -19,6 +22,15 @@ import SectionListScreen from './SectionList';
 export default function App() {
 
     const [screen,setScreen] = useState('menu');
+
+    useEffect(() => {
+        if (screen === 'splashScreen') {
+            const timer = setTimeout(() => {
+                setScreen('home');
+            }, 6000);
+            return () => clearTimeout(timer);
+        }
+    }, [screen]);
 
     switch(screen){
         case 'tarjetas': 
@@ -54,6 +66,15 @@ export default function App() {
 
         case 'sectionlist':
             return <SectionListScreen/>
+
+        case 'imagenFondo':
+            return <ImagenFondo style={styles.container}/>
+        
+        case 'home':
+            return <Home/>
+
+        case 'splashScreen':
+            return <SplashScreen/>
         
         case 'menu':
             default:
@@ -82,6 +103,10 @@ export default function App() {
                 <Button title="Practica FlatList" onPress={() => setScreen('flatlist')}/>
                 
                 <Button title="Practica SectionList" onPress={() => setScreen('sectionlist')}/>
+
+                <Button title='Imagen Bg' onPress={() => setScreen('imagenFondo')}/>
+
+                <Button title='Splash' onPress={() => setScreen('splashScreen')}/>
             </View>
 
         );
