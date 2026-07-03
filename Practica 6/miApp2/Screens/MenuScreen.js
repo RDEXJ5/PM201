@@ -15,6 +15,7 @@ import SectionListScreen from './SectionList';
 import { ImagenFondo } from './ImagenFondo';
 import { Home } from './Home';
 import { SplashScreen } from './SplashScreen';
+import ComponentesNativosScreen from './ComponentesNativosScreen';
 
 
 
@@ -76,6 +77,9 @@ export default function App() {
         case 'splashScreen':
             return <SplashScreen/>
         
+        case 'componentesNativos':
+            return <ComponentesNativosScreen/>
+        
         case 'menu':
             default:
 
@@ -107,6 +111,8 @@ export default function App() {
                 <Button title='Imagen Bg' onPress={() => setScreen('imagenFondo')}/>
 
                 <Button title='Splash' onPress={() => setScreen('splashScreen')}/>
+
+                <Button title='Componentes Nativos' onPress={() => setScreen('componentesNativos')}/>
             </View>
 
         );
