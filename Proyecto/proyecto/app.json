@@ -1,0 +1,10 @@
+{
+  "expo": {
+    "name": "Coffee Manager Mobile",
+    "slug": "coffee-manager-mobile",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "assetBundlePatterns": ["**/*"]
+  }
+}
