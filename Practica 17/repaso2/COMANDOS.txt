@@ -1,0 +1,23 @@
+# Crear el proyecto desde cero
+npx create-expo-app repaso2 --template blank
+cd repaso2
+
+# Crear carpetas
+mkdir Screens
+
+# Reemplazar o copiar los archivos incluidos en este paquete
+# App.js
+# Screens/SplashScreenRepaso.js
+# Screens/RegistroLibrosScreen.js
+# assets/bg-libros.png
+# assets/splash-book.png
+
+# Ejecutar
+npm install
+npx expo start
+
+# Commit
+cd ..
+git add "Practica 13/repaso2"
+git commit -m "Practica 17 repaso2 Registro de Libros"
+git push
