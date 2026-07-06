@@ -1,0 +1,59 @@
+services:
+  db:
+    image: mysql:8.0
+    container_name: coffeemanager_db
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: root123
+      MYSQL_DATABASE: coffee_manager
+      MYSQL_USER: api_user
+      MYSQL_PASSWORD: "1234"
+    ports:
+      - "3307:3306"
+    volumes:
+      - coffeemanager_mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-uapi_user", "-p1234"]
+      interval: 10s
+      timeout: 5s
+      retries: 15
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    container_name: coffeemanager_api
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: mysql+pymysql://api_user:1234@db:3306/coffee_manager
+    ports:
+      - "8000:8000"
+
+  seed:
+    image: mysql:8.0
+    container_name: coffeemanager_seed
+    depends_on:
+      api:
+        condition: service_started
+    volumes:
+      - ./docker/seed:/seed:ro
+    entrypoint: ["/bin/sh", "/seed/wait-and-seed.sh"]
+    restart: "no"
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile.web
+    container_name: coffeemanager_web
+    restart: unless-stopped
+    depends_on:
+      api:
+        condition: service_started
+    ports:
+      - "5500:80"
+
+volumes:
+  coffeemanager_mysql_data:
