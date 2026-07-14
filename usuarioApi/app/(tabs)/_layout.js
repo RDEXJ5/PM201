@@ -1,16 +1,39 @@
-import {tabs} from "expo-router";
-import {IonIcons} from "@expo/ vectot-icons";
+import { Tabs } from "expo-router";
+import { Ionicons } from "@expo/vector-icons";
 
 export default function RootLayout() {
     return (
-        <tabs>
+        <Tabs>
+            <Tabs.Screen
+                name="alta"
+                options={{
+                    title: "Alta",
+                    tabBarIcon: ({ focused }) => (
+                        <Ionicons name={focused ? "add-circle" : "add-circle-outline"} />
+                    ),
+                }}
+            />
 
-            <tabs.Screen name="Alta" options={{title: "Alta", tabBarIcon: ({focused}) => <IonIcons name={focused ? 'add-circle' : 'add-circle-outline'} />}}/>
+            <Tabs.Screen
+                name="consulta"
+                options={{
+                    title: "Consulta",
+                    tabBarIcon: ({ focused }) => (
+                        <Ionicons name={focused ? "search" : "search-outline"} />
+                    ),
+                }}
+            />
 
-            <tabs.Screen name="Consulta" options={{title: "Consulta", tabBarIcon: ({focused}) => <IonIcons name={focused ? 'search' : 'search-outline'} />}}/>
-
-            <tabs.Screen name="index" options={{title: "Inicio", href:null, tabBarIcon: ({focused}) => <IonIcons name={focused ? 'home' : 'home-outline'} />}}/>
-
-        </tabs>
-    )
+            <Tabs.Screen
+                name="index"
+                options={{
+                    title: "Inicio",
+                    href: null,
+                    tabBarIcon: ({ focused }) => (
+                        <Ionicons name={focused ? "home" : "home-outline"} />
+                    ),
+                }}
+            />
+        </Tabs>
+    );
 }
