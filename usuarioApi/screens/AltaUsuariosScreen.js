@@ -1,21 +1,58 @@
 import React, { useState } from 'react';
-import {View,SafeAreaView,Text,TextInput,Pressable,StyleSheet, Alert, Platform} from 'react-native';
+import {View,SafeAreaView,Text,TextInput,Pressable,StyleSheet,Alert,Platform} from 'react-native';
 
 export default function App() {
   const [nombre, setNombre] = useState('');
   const [edad, setEdad] = useState('');
   const [cargando, setCargando] = useState(false);
 
-  const mostrarMensaje= (titulo, mensaje) =>{
-    if(Platform.OS == 'web'){
-      window.alert(`${titulo}\n\n${mensaje}`);
-    }else{
-      Alert.alert(titulo,mensaje)
+  const API_BASE_URL = Platform.OS === 'web'
+    ? 'http://localhost:5000'
+    : 'http://192.168.16.56:5000';
+
+  const mostrarMensaje = (titulo, mensaje) => {
+    if (Platform.OS === 'web') {
+      alert(`${titulo}\n\n${mensaje}`);
+    } else {
+      Alert.alert(titulo, mensaje);
     }
   };
+  const guardarUsuario= async()=>{
+    if(nombre.trim() === '' || edad.trim() === ''){
+      mostrarMensaje('Vacios','Llene nombre y edad para continuar');
+      return;
+    }
+    try{
+      setCargando(true);
+      const respuesta = await fetch(`${API_BASE_URL}/v1/usuarios/`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({nombre: nombre, edad: edad}),
+        }
+      );
 
+      if (!respuesta.ok) {
+        throw new Error(`Error ${respuesta.status}`);
+      }
 
+      const datos = await respuesta.json();
+      console.log(datos);
+      mostrarMensaje('Éxito','Usuario guardado correctamente');
+      setNombre('');
+      setEdad('');
 
+    }
+    catch(error){
+      console.error('Error al guardar usuario:', error);
+      mostrarMensaje('Error','Ocurrió un error al guardar el usuario');
+    }
+    finally{
+      setCargando(false);
+    }
+  }
   return (
     <SafeAreaView style={styles.container}>
 
@@ -40,9 +77,9 @@ export default function App() {
           onChangeText={setEdad}
         />
 
-        <Pressable style={styles.boton}>
+        <Pressable style={styles.boton} onPress={guardarUsuario} disabled={cargando}>
           <Text style={styles.textoBoton}>
-            Agregar Usuario
+            {cargando ? 'Guardando...' : 'Agregar Usuario'}
           </Text>
         </Pressable>
 

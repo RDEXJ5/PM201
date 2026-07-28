@@ -1,25 +1,33 @@
-import React, {useState, useEffect, useEffectEvent} from 'react';
-import {SafeAreaView,View,Text,FlatList,StyleSheet,
+import React from 'react';
+import {SafeAreaView,View,Text,FlatList,StyleSheet, Platform,
 } from 'react-native';
+import {useState, useEffect} from 'react';
 
 export default function ConsultaUsuariosScreen() {
 
   const [usuarios, setUsuarios] = useState([]);
 
+  const API_BASE_URL = Platform.OS === 'web'
+    ? 'http://localhost:5000'
+    : 'http://192.168.16.56:5000';
+
   const obtenerUsuarios = async () => {
-    try {
-      const respuesta= await fetch('https://localhost:5000/v1/usuarios/');
-      const datos= await respuesta.json();
-      console.log('Respuesta API', datos);
+    try{
+      const respuesta = await fetch(`${API_BASE_URL}/v1/usuarios/`);
 
+      if (!respuesta.ok) {
+        throw new Error(`Error ${respuesta.status}`);
+      }
+
+      const datos = await respuesta.json();
+      console.log(datos);
       setUsuarios(datos.usuarios);
-  }catch(error){
-      console.log("Error:", error);
-  };
-}
-
-  useEffectEvent(() => {obtenerUsuarios();},[])
-
+    }catch(error){
+      console.error('Error al obtener usuarios:', error);
+    }};
+    useEffect(() => {
+      obtenerUsuarios();
+    }, []);
   const renderTarjeta = ({ item }) => (
     <View style={styles.card}>
 

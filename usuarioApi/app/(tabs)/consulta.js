@@ -1,5 +1,5 @@
-import ConsultaUsuariosScreen from "../../screens/ConsultaUsuariosScreen";
+import ConsultaUsuariosScreen from "../../screens/ConsultaUsuariosScreen"
 
-export default function consulta() {
+export default function consulta(){
     return <ConsultaUsuariosScreen></ConsultaUsuariosScreen>
 }
