@@ -1,16 +1,24 @@
-import React from 'react';
+import React, {useState, useEffect, useEffectEvent} from 'react';
 import {SafeAreaView,View,Text,FlatList,StyleSheet,
 } from 'react-native';
 
 export default function ConsultaUsuariosScreen() {
 
-  const usuarios = [
-    { id: '1', nombre: 'Isay Guerra', edad: 22 },
-    { id: '2', nombre: 'Ana López', edad: 19 },
-    { id: '3', nombre: 'Carlos Gonzalez', edad: 25 },
-    { id: '4', nombre: 'Bjork Guerra', edad: 21 },
-    { id: '5', nombre: 'Luisa Martínez', edad: 28 },
-  ];
+  const [usuarios, setUsuarios] = useState([]);
+
+  const obtenerUsuarios = async () => {
+    try {
+      const respuesta= await fetch('https://localhost:5000/v1/usuarios/');
+      const datos= await respuesta.json();
+      console.log('Respuesta API', datos);
+
+      setUsuarios(datos.usuarios);
+  }catch(error){
+      console.log("Error:", error);
+  };
+}
+
+  useEffectEvent(() => {obtenerUsuarios();},[])
 
   const renderTarjeta = ({ item }) => (
     <View style={styles.card}>
