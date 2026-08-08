@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "repa2",
+    "name": "Usuarios API",
     "slug": "repa2",
     "scheme": "repa2",
     "version": "1.0.0",
@@ -17,6 +17,8 @@
       "supportsTablet": true
     },
     "android": {
+      "package": "com.britz.usuarioapi",
+      "versionCode": 1,
       "adaptiveIcon": {
         "foregroundImage": "./assets/logo-app.png",
         "backgroundColor": "#E2D3C5"
@@ -27,7 +29,22 @@
       "favicon": "./assets/favicon.png"
     },
     "plugins": [
-      "expo-router"
-    ]
+      "expo-router",
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "usesCleartextTraffic": true
+          }
+        }
+      ]
+    ],
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "6d51efaf-5517-479e-bb4c-3bf6159511d3"
+      }
+    },
+    "owner": "rdex-j5"
   }
 }

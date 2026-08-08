@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "expo": "~54.0.36",
+    "expo-build-properties": "~1.0.10",
     "expo-router": "~6.0.24",
     "expo-splash-screen": "~31.0.13",
     "expo-status-bar": "~3.0.9",
