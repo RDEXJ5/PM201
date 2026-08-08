@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 
 import {
-  SafeAreaView,
   View,
   Text,
   Pressable,
@@ -12,9 +11,12 @@ import {
 } from 'react-native';
 
 import {
+  Redirect,
   useLocalSearchParams,
   useRouter,
 } from 'expo-router';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { obtenerApiUrl } from '../config/api';
 
 export default function DetalleUsuarioScreen() {
   const router = useRouter();
@@ -34,10 +36,11 @@ export default function DetalleUsuarioScreen() {
   const [eliminando, setEliminando] =
     useState(false);
 
-  const API_BASE_URL =
-    Platform.OS === 'web'
-      ? 'http://localhost:5000'
-      : 'http://10.86.100.240:5000';
+  const API_BASE_URL = obtenerApiUrl();
+
+  if (!API_BASE_URL) {
+    return <Redirect href="/" />;
+  }
 
   const mostrarMensaje = (
     titulo,
@@ -70,6 +73,10 @@ export default function DetalleUsuarioScreen() {
         `${API_BASE_URL}/v1/usuarios/${registroId}`,
         {
           method: 'DELETE',
+          headers: {
+            Authorization:
+              'Basic YWRtaW46MTIzNA==',
+          },
         }
       );
 

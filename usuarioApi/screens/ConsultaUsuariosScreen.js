@@ -1,26 +1,23 @@
 import React, { useEffect, useState } from 'react';
 
 import {
-  SafeAreaView,
   View,
   Text,
   FlatList,
   StyleSheet,
-  Platform,
   Pressable,
 } from 'react-native';
 
 import { useRouter } from 'expo-router';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { obtenerApiUrl } from '../config/api';
 
 export default function ConsultaUsuariosScreen() {
   const [usuarios, setUsuarios] = useState([]);
 
   const router = useRouter();
 
-  const API_BASE_URL =
-    Platform.OS === 'web'
-      ? 'http://localhost:5000'
-      : 'http://10.86.100.240:5000';
+  const API_BASE_URL = obtenerApiUrl();
 
   const obtenerUsuarios = async () => {
     try {

@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
-import {View,SafeAreaView,Text,TextInput,Pressable,StyleSheet,Alert,Platform} from 'react-native';
+import {View,Text,TextInput,Pressable,StyleSheet,Alert,Platform} from 'react-native';
+import {SafeAreaView} from 'react-native-safe-area-context';
+import {obtenerApiUrl} from '../config/api';
 
 export default function App() {
   const [nombre, setNombre] = useState('');
   const [edad, setEdad] = useState('');
   const [cargando, setCargando] = useState(false);
 
-  const API_BASE_URL = Platform.OS === 'web'
-    ? 'http://localhost:5000'
-    : 'http://192.168.16.56:5000';
+  const API_BASE_URL = obtenerApiUrl();
 
   const mostrarMensaje = (titulo, mensaje) => {
     if (Platform.OS === 'web') {
@@ -30,7 +30,10 @@ export default function App() {
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({nombre: nombre, edad: edad}),
+          body: JSON.stringify({
+            nombre: nombre.trim(),
+            edad: Number(edad),
+          }),
         }
       );
 
